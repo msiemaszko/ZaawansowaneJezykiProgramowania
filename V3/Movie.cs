@@ -9,22 +9,38 @@ namespace V3
         public const int REGULAR = 0;
 
         private readonly String title;
-        private int priceCode;
+        private Price price;
 
         public Movie(String title, int priceCode)
         {
             this.title = title;
-            this.priceCode = priceCode;
+            SetPriceCode(priceCode);
         }
 
         public int GetPriceCode()
         {
-            return priceCode;
+            return price.getPriceCode();
         }
 
-        public void SetPriceCode(int arg)
+        public void SetPriceCode(int newPriceCode)
         {
-            priceCode = arg;
+            switch (newPriceCode)
+            {
+                case REGULAR:
+                    this.price = new RegularPrice();
+                    break;
+
+                case NEW_RELEASE:
+                    price = new NewReleasePrice();
+                    break;
+
+                case CHILDRENS:
+                    price = new ChildrensPrice();
+                    break;
+
+                default:
+                    throw new ArgumentException("Nieprawidlowy kod Ceny");
+            }
         }
 
 
@@ -50,37 +66,9 @@ namespace V3
             return 1;
         }
 
-
         public double CountPrice(int daysRented)
         {
-            //determine amounts for each position
-            switch (GetPriceCode())
-            {
-                case REGULAR:
-                    return CalculatePrice(2.0, 2, 1.5, daysRented);
-
-                case NEW_RELEASE:
-                    return daysRented * 3;
-
-                case CHILDRENS:
-                    return CalculatePrice(1.5, 3, 1.5, daysRented);
-            }
-            return 0;
-        }
-
-
-        private double CalculatePrice(double initialPrice, int initialDays, double dailyPrice, int daysRented)
-        {
-            double thisAmount = 0;
-
-            // nalicz standardowa dzienna oplate
-            thisAmount += initialPrice;
-
-            // jezeli czas wypozyczenia przekroczy norminalna ilisc dni
-            if (daysRented > initialDays)
-                thisAmount += (daysRented - initialDays) * dailyPrice;
-
-            return thisAmount;
+            return price.CountPrice(daysRented);
         }
     }
 }
