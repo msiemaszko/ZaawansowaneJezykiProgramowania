@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using V1;
+using V2;
 
 namespace RentalTests
 {
@@ -20,7 +20,7 @@ namespace RentalTests
             Customer result = new Customer(name);
             foreach (Rental rental in rentals)
             {
-                result.addRental(rental);
+                result.AddRental(rental);
             }
             return result;
         }
