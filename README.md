@@ -30,6 +30,20 @@ Dla analizowanej sekcji kodu powstał zestaw testów, które mają kluczowe znac
 
 ### Wersja 0
 Wersja 0 jest wersją startową, którą poddam dalszym procesom refaktoryzacji.
+
+#### Wnioski:
+* Pierwsze to co się rzuca w oczy to metoda statement w klasie Customer. Jest zbyt długa i wykonuje zbyt dużo operacji.
+* Kod w takiej formie nie spełnia zasady *Open/Closed* – modyfikacja nie będzie łatwa w przypadku 
+gdy np. trzeba będzie dodać kolejny typ filmu.
+* Kod nie spełnia założenia *Single Responsibility*, tzn. klasy nie są odpowiedzialne tylko za jedną rzecz. W zasadzie to wszystkie 
+operacje są wykonywane w jednej klasie – **Customer**, pozostałe klasy nie robią nic.
+
+#### Oczekiwania po refaktoryzacji
+* Zmiana wewnętrznej struktury kodu programu ta aby spełniał on założenia programowania obiektowego
+* Kod będzie czytelny i zrozumiały oraz będzie jasno komunikował swój cel
+* Kod będzie otwarty na dalsze zmiany
+* Dokonane refaktoryzacje nie spowodują zmiany zachowań / funkcjonalności programu
+
 #### Metryki:
 * Indeks dostępności: 78,67
 * Złożoność cyklomatyczna: 6,33
@@ -59,7 +73,7 @@ Wersja 0 jest wersją startową, którą poddam dalszym procesom refaktoryzacji.
 
 #### Metryki:
   * Indeks dostępności: 76
-  * Złożoność cyklomatyczna: 
+  * Złożoność cyklomatyczna: 7
   * Sprzężenie klas: 2
   * Wiersze kodu: 51
 
@@ -117,3 +131,9 @@ Wersja 0 jest wersją startową, którą poddam dalszym procesom refaktoryzacji.
 ![Wykres metryk kodu](Images/plot.png)
 
 Jak widać na powyższym wykresie wszystkie zastosowane przeze mnie metody refaktoryzacji spowodowały powstanie coraz to lepszego kodu, który jest prostszy w zrozumieniu i w dalszym rozwijaniu. 
+
+### Źródła:
+* Martin Fowler - Refaktoryzacja. Ulepszanie struktury istniejącego kodu – wersja pierwsza 
+* Wykład Bartosz Walter - Wprowadzenie do refaktoryzacji
+* Wykład Włodek Krakowski - Efektywna Refaktoryzacja (2014)
+* Pragmatists.pl Testy jednostkowe MovieRental w języku csharp
